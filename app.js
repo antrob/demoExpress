@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
-const port = 3000
+
+// This ensures that when connected to Heroku 
+// the app runs on process.env.PORT 
+// and if tested locally it can also run on port 3030
+const port = process.env.PORT || 3030
 
 const testaRepConcelho = require("./validateRepresentation")
 
@@ -34,6 +38,7 @@ app.listen(port, () => {
 // Endpoint /concelhos    Métodos GET e POST
 app.get('/concelhos', (req, res) => {
     //res.send('Responder com a lista dos concelhos no formato JSON')
+    res.setHeader( "Access-Control-Allow-Origin","*")
     res.send( JSON.stringify(concelhos) )
   })
 
